@@ -3,13 +3,10 @@ package fr.adrienbrault.notetonsta.servlet;
 import fr.adrienbrault.notetonsta.entity.Campus;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -17,19 +14,12 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/campus/select")
 @SuppressWarnings("serial")
-public class CampusChoiceServlet extends HttpServlet {
+public class CampusChoiceServlet extends HibernateServlet {
 
-    private EntityManagerFactory emf;
-
-    @Override
-    public void init() throws ServletException {
-        emf = Persistence.createEntityManagerFactory("PU");
-    }
-
-    @Override
+	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = getEmf().createEntityManager();
 
         createDefaultCampusesIfNeeded(em);
         
@@ -39,11 +29,6 @@ public class CampusChoiceServlet extends HttpServlet {
 
         RequestDispatcher rd = req.getRequestDispatcher("/campusChoice.jsp");
         rd.forward(req, resp);
-    }
-
-    @Override
-    public void destroy() {
-        emf.close();
     }
 
     protected void createDefaultCampusesIfNeeded(EntityManager em) {

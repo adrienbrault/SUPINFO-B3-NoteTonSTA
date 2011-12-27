@@ -1,6 +1,9 @@
 package fr.adrienbrault.notetonsta.entity;
 
 import javax.persistence.*;
+
+import com.sun.istack.internal.NotNull;
+
 import java.util.List;
 
 /**
