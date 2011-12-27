@@ -3,6 +3,7 @@ package fr.adrienbrault.notetonsta.servlet;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -47,9 +48,11 @@ public class SpeakerRegister extends HibernateServlet {
 		
 		if (email == null || email.length() == 0) {
 			errors.put("email", "This field is required.");
+		} else if (!Pattern.compile("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$").matcher(email).matches()) {
+			errors.put("email", "This email is invalid.");
 		}
 		
-		Query emailCountQuery = em.createQuery("SELECT COUNT(c) FROM Speaker c WHERE email = :email");
+		Query emailCountQuery = em.createQuery("SELECT COUNT(s) FROM Speaker s WHERE s.email = :email");
 		emailCountQuery.setParameter("email", email.toLowerCase());
 		if ((Long)emailCountQuery.getSingleResult() > 0) {
 			errors.put("email", "This email is already used.");

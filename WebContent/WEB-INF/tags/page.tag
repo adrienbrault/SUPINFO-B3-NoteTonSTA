@@ -31,8 +31,21 @@
 			<div class="container">
 			  	<a class="brand" href="${pageContext.request.contextPath}">NoteTonSTA</a>
 			  	<ul class="nav">
-			    	<li><a href="${pageContext.request.contextPath}/register">Register</a></li>
-			    	<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+			  		<c:choose>
+					  	<c:when test="${not empty logged_speaker}">
+					  		<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+					  	</c:when>
+					  	<c:otherwise>
+					    	<li><a href="${pageContext.request.contextPath}/register">Register</a></li>
+				    		<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+					  	</c:otherwise>
+					</c:choose>
+			  	</ul>
+			  	
+			  	<ul class="nav secondary-nav">
+			  		<c:if test="${not empty logged_speaker}">
+			  			<li><a href="#">Logged in as <c:out value="${logged_speaker.email}" /></a></li>
+			  		</c:if>
 			  	</ul>
 			</div>
 		</div>

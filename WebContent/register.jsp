@@ -96,7 +96,7 @@
     			</div>
     			
     			<div class="actions">
-	            	<input type="submit" class="btn primary" value="Save changes">
+	            	<input type="submit" class="btn primary" value="Register">
 	          	</div>
     		</fieldset>
     	</form>

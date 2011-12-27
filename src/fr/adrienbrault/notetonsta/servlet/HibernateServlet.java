@@ -5,6 +5,7 @@ import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
+@SuppressWarnings("serial")
 public abstract class HibernateServlet extends HttpServlet {
 	
 	private EntityManagerFactory emf;
