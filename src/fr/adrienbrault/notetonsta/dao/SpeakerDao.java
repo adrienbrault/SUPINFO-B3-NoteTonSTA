@@ -13,7 +13,10 @@ public class SpeakerDao extends Dao<Speaker, Integer> {
 	}
 	
 	public Speaker findByEmail(String email) {
-		Query query = entityManager.createQuery("SELECT s FROM Speaker s WHERE s.email = :email");
+		Query query = entityManager.createQuery(
+			"SELECT s" +
+			"FROM Speaker s" +
+			"WHERE s.email = :email");
 		query.setParameter("email", email);
 		
 		Speaker speaker;
@@ -28,7 +31,11 @@ public class SpeakerDao extends Dao<Speaker, Integer> {
 	}
 	
 	public Long countByEmail(String email) {
-		Query query = entityManager.createQuery("SELECT COUNT(s) FROM Speaker s WHERE s.email = :email");
+		Query query = entityManager.createQuery(
+			"SELECT COUNT(s)" +
+			"FROM Speaker s" +
+			"WHERE s.email = :email"
+		);
 		query.setParameter("email", email);
 		
 		return (Long) query.getSingleResult();
