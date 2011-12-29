@@ -1,9 +1,8 @@
 package fr.adrienbrault.notetonsta.servlet;
 
+import fr.adrienbrault.notetonsta.dao.CampusDao;
 import fr.adrienbrault.notetonsta.entity.Campus;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,11 +18,11 @@ public class CampusChoiceServlet extends HibernateServlet {
 	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        EntityManager em = getEmf().createEntityManager();
-
-        createDefaultCampusesIfNeeded(em);
+        CampusDao campusDao = new CampusDao(createEm());
         
-        List<Campus> campuses = em.createQuery("SELECT c FROM Campus AS c").getResultList();
+        createDefaultCampusesIfNeeded(campusDao);
+        
+        List<Campus> campuses = campusDao.findAll();
 
         req.setAttribute("campuses", campuses);
 
@@ -31,11 +30,8 @@ public class CampusChoiceServlet extends HibernateServlet {
         rd.forward(req, resp);
     }
 
-    protected void createDefaultCampusesIfNeeded(EntityManager em) {
-        Query query = em.createQuery("SELECT COUNT(c) FROM Campus AS c");
-        Long count = (Long)query.getSingleResult();
-
-        if (count == 0) {
+    protected void createDefaultCampusesIfNeeded(CampusDao campusDao) {
+        if (campusDao.countAll() == 0) {
             String[] campusesNames = {
                     "Paris",
                     "Marseille",
@@ -43,7 +39,7 @@ public class CampusChoiceServlet extends HibernateServlet {
                     "Rennes",
             };
 
-            em.getTransaction().begin();
+            campusDao.beginTransaction();
             
             for (int i=0; i<campusesNames.length; i++) {
                 String campusName = campusesNames[i];
@@ -51,10 +47,10 @@ public class CampusChoiceServlet extends HibernateServlet {
                 Campus campus = new Campus();
                 campus.setName(campusName);
                 
-                em.persist(campus);
+                campusDao.persist(campus);
             }
             
-            em.getTransaction().commit();
+            campusDao.commitTransaction();
         }
     }
 

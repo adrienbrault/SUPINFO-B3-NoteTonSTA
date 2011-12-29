@@ -5,14 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.adrienbrault.notetonsta.dao.SpeakerDao;
 import fr.adrienbrault.notetonsta.entity.Speaker;
 import fr.adrienbrault.notetonsta.service.PasswordService;
 
@@ -28,7 +27,7 @@ public class SpeakerRegister extends HibernateServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		EntityManager em = getEmf().createEntityManager();
+		SpeakerDao speakerDao = new SpeakerDao(createEm());
 		
 		String firstName = request.getParameter("first_name");
 		String lastName = request.getParameter("last_name");
@@ -52,9 +51,7 @@ public class SpeakerRegister extends HibernateServlet {
 			errors.put("email", "This email is invalid.");
 		}
 		
-		Query emailCountQuery = em.createQuery("SELECT COUNT(s) FROM Speaker s WHERE s.email = :email");
-		emailCountQuery.setParameter("email", email.toLowerCase());
-		if ((Long)emailCountQuery.getSingleResult() > 0) {
+		if (speakerDao.countByEmail(email) > 0) {
 			errors.put("email", "This email is already used.");
 		}
 		
@@ -88,19 +85,15 @@ public class SpeakerRegister extends HibernateServlet {
 			}
 			
 			if (speaker != null) {
-				em.getTransaction().begin();
-				em.persist(speaker);
-				em.getTransaction().commit();
-				
-				em.close();
+				speakerDao.beginTransaction();
+				speakerDao.persist(speaker);
+				speakerDao.commitTransaction();
 				
 				request.getSession().setAttribute("speaker_id", speaker.getId());
 				response.sendRedirect(request.getContextPath() + "/");
 				return;
 			}
 		}
-		
-		em.close();
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
         rd.forward(request, response);

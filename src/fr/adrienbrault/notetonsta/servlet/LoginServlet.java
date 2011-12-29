@@ -2,16 +2,13 @@ package fr.adrienbrault.notetonsta.servlet;
 
 import java.io.IOException;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.adrienbrault.notetonsta.dao.SpeakerDao;
 import fr.adrienbrault.notetonsta.entity.Speaker;
 import fr.adrienbrault.notetonsta.service.PasswordService;
 
@@ -29,18 +26,13 @@ public class LoginServlet extends HibernateServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		EntityManager em = getEmf().createEntityManager();
+		SpeakerDao speakerDao = new SpeakerDao(createEm());
 		
-		Query speakerQuery = em.createQuery("SELECT s FROM Speaker s WHERE s.email = :email");
-		speakerQuery.setParameter("email", email);
-		Speaker speaker = null;
-		try {
-			speaker = (Speaker)speakerQuery.getSingleResult();
-		} catch (NoResultException e) {
+		Speaker speaker = speakerDao.findByEmail(email);
+		
+		if (speaker == null) {
 			request.setAttribute("alert_error", "Invalid email.");
-		}
-		
-		if (speaker != null) {
+		} else {
 			try {
 				String hashedPassword = PasswordService.hashPassword(password, speaker.getSalt());
 				
@@ -56,8 +48,6 @@ public class LoginServlet extends HibernateServlet {
 				request.setAttribute("alert_error", "An error occured: " + e.getLocalizedMessage());
 			}
 		}
-		
-		em.close();
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
         rd.forward(request, response);

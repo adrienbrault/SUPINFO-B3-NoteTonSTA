@@ -1,5 +1,6 @@
 package fr.adrienbrault.notetonsta.servlet;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.ServletException;
@@ -12,6 +13,10 @@ public abstract class HibernateServlet extends HttpServlet {
 	
 	protected EntityManagerFactory getEmf() {
 		return this.emf;
+	}
+	
+	protected EntityManager createEm() {
+		return emf.createEntityManager();
 	}
 
     @Override
