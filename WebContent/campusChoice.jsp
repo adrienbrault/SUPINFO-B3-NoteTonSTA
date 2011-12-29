@@ -40,7 +40,7 @@
 		<script type="text/javascript">
 		$(function() {
 			$("#campus_select").change(function() {
-				window.location = "${pageContext.request.contextPath}/interventions?id=" + $(this).val();
+				window.location = "${pageContext.request.contextPath}/interventions?campusId=" + $(this).val();
 			});
 		});
 		</script>

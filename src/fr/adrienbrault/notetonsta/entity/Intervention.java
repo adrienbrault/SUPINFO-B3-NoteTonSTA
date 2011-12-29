@@ -105,5 +105,20 @@ public class Intervention {
     public void setEvaluations(List<Evaluation> evaluations) {
         this.evaluations = evaluations;
     }
+    
+    public String getStatusString() {
+    	Date now = new Date();
+    	String status;
+    	
+    	if (dateBegin.before(now)) {
+    		status = "Ended";
+    	} else if (dateEnd.after(now)) {
+    		status = "To begin";
+    	} else {
+    		status = "In progress";
+    	}
+    	
+    	return status;
+    }
 
 }
