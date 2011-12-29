@@ -29,7 +29,11 @@
 						<c:forEach items="${interventions}" var="intervention">
 						
 							<tr>
-								<td>${intervention.subject}</td>
+								<td>
+									<a href="${pageContext.request.contextPath}/intervention?id=${intervention.id}">
+										${intervention.subject}
+									</a>
+								</td>
 								<td><fmt:formatDate value="${intervention.dateBegin}" /></td>
 								<td><fmt:formatDate value="${intervention.dateEnd}" /></td>
 								<td>${intervention.statusString}</td>

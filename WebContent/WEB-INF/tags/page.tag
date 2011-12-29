@@ -65,11 +65,7 @@
 				</c:if>
 			</div>
 			
-			<div class="row">
-				<div class="span14">
-					<jsp:doBody/>
-				</div>
-			</div>
+			<jsp:doBody/>
 	    </div>
         
     </div>

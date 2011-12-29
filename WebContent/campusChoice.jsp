@@ -8,6 +8,7 @@
     </jsp:attribute>
 
     <jsp:body>
+    	
     	<p>This website propose you to evaluate interventions of SUPINFO speakers.</p>
 		<p>You can also see statistics by speaker or campus.</p>
    
