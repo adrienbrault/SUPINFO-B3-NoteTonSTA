@@ -18,11 +18,11 @@
     						id="first_name_input"
     						type="text"
     						name="first_name"
-    						value="<c:out value="${param.first_name}" />"
+    						value="${param.first_name}"
    						/>
     					
     					<c:if test="${not empty errors.first_name}">
-	    					<span class="help-inline"><c:out value="${errors.first_name}" /></span>
+	    					<span class="help-inline">${errors.first_name}</span>
 	    				</c:if>
     				</div>
     			</div>
@@ -35,11 +35,11 @@
     						type="text"
     						name="last_name"
     						id="last_name_input"
-    						value="<c:out value="${param.last_name}" />"
+    						value="${param.last_name}"
     					/>
     				
     					<c:if test="${not empty errors.last_name}">
-	    					<span class="help-inline"><c:out value="${errors.last_name}" /></span>
+	    					<span class="help-inline">${errors.last_name}</span>
 	    				</c:if>
     				</div>
     			</div>
@@ -52,11 +52,11 @@
     						type="text"
     						name="email"
     						id="email_input"
-    						value="<c:out value="${param.email}" />"
+    						value="${param.email}"
     					/>
     				
     					<c:if test="${not empty errors.email}">
-	    					<span class="help-inline"><c:out value="${errors.email}" /></span>
+	    					<span class="help-inline">${errors.email}</span>
 	    				</c:if>
     				</div>
     			</div>
@@ -69,11 +69,11 @@
     						type="password"
     						name="password"
     						id="password_input"
-    						value="<c:out value="${param.password}" />"
+    						value="${param.password}"
     					/>
     				
     					<c:if test="${not empty errors.password}">
-	    					<span class="help-inline"><c:out value="${errors.password}" /></span>
+	    					<span class="help-inline">${errors.password}</span>
 	    				</c:if>
     				</div>
     			</div>
@@ -86,11 +86,11 @@
     						type="password"
     						name="password_confirmation"
     						id="password_confirmation_input"
-    						value="<c:out value="${param.password_confirmation}" />"
+    						value="${param.password_confirmation}"
     					/>
     				
     					<c:if test="${not empty errors.password_confirmation}">
-	    					<span class="help-inline"><c:out value="${errors.password_confirmation}" /></span>
+	    					<span class="help-inline">${errors.password_confirmation}</span>
 	    				</c:if>
     				</div>
     			</div>

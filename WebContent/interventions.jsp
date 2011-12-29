@@ -5,7 +5,7 @@
 
 <t:page>
 	<jsp:attribute name="title">
-    	Interventions from <c:out value="${campus.name}" />
+    	Interventions from ${campus.name}"
     </jsp:attribute>
 
     <jsp:body>
@@ -13,7 +13,7 @@
     	<c:choose>
 			<c:when test="${interventions.size() gt 0}">
 			
-				<table class="bordered-table">
+				<table class="bordered-table zebra-striped">
 				
 					<thead>
 						<tr>
@@ -29,10 +29,10 @@
 						<c:forEach items="${interventions}" var="intervention">
 						
 							<tr>
-								<td><c:out value="${intervention.subject}" /></td>
+								<td>${intervention.subject}</td>
 								<td><fmt:formatDate value="${intervention.dateBegin}" /></td>
 								<td><fmt:formatDate value="${intervention.dateEnd}" /></td>
-								<td><c:out value="${intervention.statusString}" /></td>
+								<td>${intervention.statusString}</td>
 							</tr>
 						
 						</c:forEach>
@@ -44,7 +44,7 @@
 			</c:when>
 	
 			<c:otherwise>
-				<h3>There are no interventions from <c:out value="${campus.name}" />.</h3>
+				<h3>There are no interventions from ${campus.name}.</h3>
 			</c:otherwise>
 		</c:choose>
 		

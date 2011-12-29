@@ -18,7 +18,7 @@
     						id="email_input"
     						type="text"
     						name="email"
-    						value="<c:out value="${param.email}" />"
+    						value="${param.email}"
    						/>
     				</div>
     			</div>
@@ -31,7 +31,7 @@
     						id="password_input"
     						type="password"
     						name="password"
-    						value="<c:out value="${param.password}" />"
+    						value="${param.password}"
    						/>
     				</div>
     			</div>

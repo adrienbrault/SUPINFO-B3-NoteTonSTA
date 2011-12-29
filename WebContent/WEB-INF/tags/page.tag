@@ -44,7 +44,7 @@
 			  	
 			  	<ul class="nav secondary-nav">
 			  		<c:if test="${not empty logged_speaker}">
-			  			<li><a href="#">Logged in as <c:out value="${logged_speaker.email}" /></a></li>
+			  			<li><a href="#">Logged in as ${logged_speaker.email}</a></li>
 			  		</c:if>
 			  	</ul>
 			</div>
@@ -60,7 +60,7 @@
 				<c:if test="${not empty alert_error}">
 					<div class="alert-message error">
 				        <a class="close" href="#">×</a>
-				        <p><c:out value="${alert_error}" /></p>
+				        <p>${alert_error}"</p>
 		      		</div>
 				</c:if>
 			</div>

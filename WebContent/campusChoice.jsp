@@ -17,8 +17,8 @@
         	<option>-- Campus --</option>
         
             <c:forEach items="${campuses}" var="campus">
-                <option value="<c:out value="${campus.id}" />">
-                    <c:out value="${campus.name}" />
+                <option value="${campus.id}">
+                    ${campus.name}
                 </option>
             </c:forEach>
         </select>
