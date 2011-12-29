@@ -58,9 +58,9 @@
 				<h1><jsp:invoke fragment="title"/></h1>
 				
 				<c:if test="${not empty alert_error}">
-					<div class="alert-message error">
+					<div class="alert-message error" data-alert="alert">
 				        <a class="close" href="#">×</a>
-				        <p>${alert_error}"</p>
+				        <p>${alert_error}</p>
 		      		</div>
 				</c:if>
 			</div>
