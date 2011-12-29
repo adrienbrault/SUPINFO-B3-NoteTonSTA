@@ -9,8 +9,20 @@
 <head>
 	<title>NoteTonSTA - <jsp:invoke fragment="title"/></title>
 	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/jquery-ui.custom.min.js"></script>
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-alerts.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-buttons.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-dropdown.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-twipsy.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-modal.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-popover.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-scrollspy.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-tabs.js"></script>
 	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.css" />
 	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/scripts.js"></script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styles.css" />
 </head>
 <body>
@@ -57,19 +69,5 @@
 	    </div>
         
     </div>
-    
-    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/jquery.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/jquery-ui.custom.min.js"></script>
-	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-alerts.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-buttons.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-dropdown.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-twipsy.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-modal.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-popover.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-scrollspy.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-tabs.js"></script>
-	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/scripts.js"></script>
 </body>
 </html>
