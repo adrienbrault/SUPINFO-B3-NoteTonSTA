@@ -30,8 +30,6 @@ public class SpeakerSessionFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest)request;
 		HttpServletResponse httpResponse = (HttpServletResponse)response;
 		
-		httpResponse.getWriter().println("YO");
-		
 		Integer speakerId = (Integer) httpRequest.getSession().getAttribute("speaker_id");
 		if (speakerId != null) {
 			SpeakerDao speakerDao = new SpeakerDao(emf.createEntityManager());
