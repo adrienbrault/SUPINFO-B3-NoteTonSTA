@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import fr.adrienbrault.notetonsta.entity.Campus;
 import fr.adrienbrault.notetonsta.entity.Intervention;
+import fr.adrienbrault.notetonsta.entity.Speaker;
 
 public class InterventionDao extends Dao<Intervention, Integer> {
 
@@ -22,6 +23,18 @@ public class InterventionDao extends Dao<Intervention, Integer> {
 			"WHERE i.campus = :campus "
 		);
 		query.setParameter("campus", campus);
+		
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Intervention> findBySpeaker(Speaker speaker) {
+		Query query = entityManager.createQuery(
+			"SELECT i " +
+			"FROM " + entityClass.getName() + " i " +
+			"WHERE i.speaker = :speaker "
+		);
+		query.setParameter("speaker", speaker);
 		
 		return query.getResultList();
 	}

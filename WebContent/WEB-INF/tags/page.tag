@@ -33,6 +33,7 @@
 			  	<ul class="nav">
 			  		<c:choose>
 					  	<c:when test="${not empty logged_speaker}">
+					  		<li><a href="${pageContext.request.contextPath}/interventions/mine">My interventions</a></li>
 					  		<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 					  	</c:when>
 					  	<c:otherwise>
