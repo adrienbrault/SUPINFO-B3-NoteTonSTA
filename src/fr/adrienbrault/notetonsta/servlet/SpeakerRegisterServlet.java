@@ -17,7 +17,7 @@ import fr.adrienbrault.notetonsta.service.PasswordService;
 
 @WebServlet("/register")
 @SuppressWarnings("serial")
-public class SpeakerRegister extends HibernateServlet {
+public class SpeakerRegisterServlet extends HibernateServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
