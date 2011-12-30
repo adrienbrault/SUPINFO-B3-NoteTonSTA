@@ -1,4 +1,3 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -16,6 +15,7 @@
     		<thead>
     			<tr>
 	    			<th>Campus</th>
+	    			<th>Speaker</th>
 	    			<th>From</th>
 	    			<th>To</th>
     			</tr>
@@ -23,6 +23,7 @@
     		<tbody>
     			<tr>
     				<td>${intervention.campus.name}</td>
+    				<td>${intervention.speaker.firstName} ${intervention.speaker.lastName}</td>
     				<td><fmt:formatDate value="${intervention.dateBegin}" /></td>
     				<td><fmt:formatDate value="${intervention.dateEnd}" /></td>
     			</tr>
@@ -68,7 +69,7 @@
     		
     		<div id="evaluate-intervention-modal" class="modal hide fade">
 	            <div class="modal-header">
-	              	<a href="#" class="close">Ã—</a>
+	              	<a href="#" class="close">×</a>
 	              	<h3>Evaluate <strong>${intervention.subject}</strong></h3>
 	            </div>
 	            <div class="modal-body" style="max-height: 400px; overflow: auto;">

@@ -11,6 +11,7 @@
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/jquery-ui.custom.min.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/vendor/Aristo/Aristo.css" />
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-alerts.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap-buttons.js"></script>
@@ -34,6 +35,7 @@
 			  		<c:choose>
 					  	<c:when test="${not empty logged_speaker}">
 					  		<li><a href="${pageContext.request.contextPath}/interventions/mine">My interventions</a></li>
+					  		<li><a href="${pageContext.request.contextPath}/intervention/new">New intervention</a></li>
 					  		<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 					  	</c:when>
 					  	<c:otherwise>
