@@ -10,6 +10,7 @@ import java.util.List;
  */
 
 @Entity
+@Table(name = "campus")
 public class Campus {
 
     @Id

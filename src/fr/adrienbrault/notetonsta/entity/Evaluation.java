@@ -9,6 +9,7 @@ import javax.persistence.*;
  */
 
 @Entity
+@Table(name = "evaluation")
 public class Evaluation {
 
     @Id
@@ -16,6 +17,7 @@ public class Evaluation {
     protected Integer id;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "intervention_id")
     protected Intervention intervention;
 
     @Basic
@@ -42,8 +44,8 @@ public class Evaluation {
     @Basic
     protected Float slidesExamplesMark;
 
-    public Evaluation() {
-
+    public Evaluation(Intervention intervention) {
+    	setIntervention(intervention);
     }
 
     public Integer getId() {

@@ -1,6 +1,7 @@
 package fr.adrienbrault.notetonsta.entity;
 
 import javax.persistence.*;
+
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  */
 
 @Entity
+@Table(name = "intervention")
 public class Intervention {
 
     @Id
@@ -18,6 +20,7 @@ public class Intervention {
     protected Integer id;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "campus_id")
     protected Campus campus;
 
     @Basic
@@ -33,6 +36,7 @@ public class Intervention {
     protected Date dateEnd;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "speaker_id")
     protected Speaker speaker;
 
     @OneToMany(mappedBy = "intervention", cascade = CascadeType.ALL)
