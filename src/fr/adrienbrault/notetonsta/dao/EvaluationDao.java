@@ -56,4 +56,15 @@ public class EvaluationDao extends Dao<Evaluation, Integer> {
 		return (Double)query.getSingleResult();
 	}
 	
+	public Long countByIdBooster(Integer idBooster) {
+		Query query = entityManager.createQuery(
+			"SELECT COUNT(e) " +
+			"FROM " + entityClass.getName() + " e " +
+			"WHERE e.idBooster = :idBooster"
+		);
+		query.setParameter("idBooster", idBooster);
+		
+		return (Long)query.getSingleResult();
+	}
+	
 }

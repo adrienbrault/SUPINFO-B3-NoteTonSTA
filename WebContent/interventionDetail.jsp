@@ -62,6 +62,86 @@
     			</tr>
     		</tbody>
     	</table>
+    	
+    	<c:if test="${empty logged_speaker}">
+    		<button class="btn primary evaluateIntervention">Evaluate</button>
+    		
+    		<div id="evaluate-intervention-modal" class="modal hide fade">
+	            <div class="modal-header">
+	              	<a href="#" class="close">×</a>
+	              	<h3>Evaluate <strong>${intervention.subject}</strong></h3>
+	            </div>
+	            <div class="modal-body" style="max-height: 400px; overflow: auto;">
+	              	
+	            </div>
+	            <div class="modal-footer">
+	              	<button id="submitEvaluateIntervention" class="btn primary">Submit</button>
+	            </div>
+          	</div>
+    		
+    		<script type="text/javascript">
+    		$(function() {
+    			var evaluateInterventionButton = $('.evaluateIntervention')
+    			var submitEvaluateIntervention = $('#submitEvaluateIntervention');
+    			var modal = $('#evaluate-intervention-modal');
+				var modalBody = modal.find('.modal-body');
+				var submitUrl = '${pageContext.request.contextPath}/evaluate/intervention?id=${intervention.id}';
+				
+    			evaluateInterventionButton.bind('click', function(event) {
+    				submitEvaluateIntervention.show();
+    				
+    				modal.modal({
+    					'show': true,
+    					'backdrop': true
+    				});
+    				
+    				var loadingBody = 
+    					'<div style="text-align: center; margin: 10px;">'
+    						+ '<img src="${pageContext.request.contextPath}/assets/img/ajax-loader.gif" alt="Loading" />'
+    					+ '</div>';
+    				modalBody.html(loadingBody);
+    				
+    				submitEvaluateIntervention.button('loading');
+    				
+    				$.ajax({
+    					url: submitUrl
+    				}).done(function(response) {
+    					// Check if response is OK.
+   						modalBody.html(response);
+   					}).fail(function() {
+   						modal.modal('hide');
+   					}).always(function() {
+   						submitEvaluateIntervention.button('reset');
+   					});
+    			});
+    			
+    			submitEvaluateIntervention.bind('click', function(event) {
+    				var form = modal.find('form');
+    				
+    				form.submit();
+    			});
+    			
+    			modal.on('submit', 'form', function(event) {
+    				event.preventDefault();
+    				
+    				var form = modal.find('form');
+    				
+    				$.ajax({
+    					url: submitUrl,
+    					type: 'POST',
+    					data: form.serialize()
+    				}).done(function (response) {
+    					if (response == 'OK') {
+    						modalBody.html('<h3>Your evaluation has been created.</h3>');
+    						submitEvaluateIntervention.hide();
+    					} else {
+    						modalBody.html(response);
+    					}
+    				});
+    			});
+    		});
+    		</script>
+    	</c:if>
 	    
     </jsp:body>
 </t:page>

@@ -2,7 +2,6 @@ package fr.adrienbrault.notetonsta.servlet;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -13,10 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.adrienbrault.notetonsta.dao.CampusDao;
 import fr.adrienbrault.notetonsta.dao.EvaluationDao;
 import fr.adrienbrault.notetonsta.dao.InterventionDao;
-import fr.adrienbrault.notetonsta.entity.Campus;
 import fr.adrienbrault.notetonsta.entity.Intervention;
 
 @WebServlet("/intervention")
