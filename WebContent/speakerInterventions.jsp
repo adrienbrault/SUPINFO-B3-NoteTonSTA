@@ -22,6 +22,7 @@
 							<th>End</th>
 							<th>Status</th>
 							<th>Global event mark</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					
@@ -40,6 +41,10 @@
 								<td><fmt:formatDate value="${intervention.dateEnd}" /></td>
 								<td>${intervention.statusString}</td>
 								<td>${marks.get(intervention)}</td>
+								<td>
+									<a class="btn primary evaluateIntervention" href="${pageContext.request.contextPath}/intervention/delete?id=${intervention.id}">Remove</a>
+									<a class="btn primary evaluateIntervention" href="${pageContext.request.contextPath}/intervention/new?id=${intervention.id}">Edit</a>
+								</td>
 							</tr>
 						
 						</c:forEach>

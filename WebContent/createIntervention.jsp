@@ -17,7 +17,7 @@
     						id="subject_input"
     						type="text"
     						name="subject"
-    						value="${param.subject}"
+    						value="${subject}"
    						/>
     					
     					<c:if test="${not empty errors.subject}">
@@ -30,8 +30,10 @@
     				<label for="campus_select">Campus:</label>
     				<div class="input" id="campus_select">
     					<select name="campus">
-    						<c:forEach items="${campuses}" var="campus">
-    							<option value="${campus.id}">${campus.name}</option>
+    						<c:forEach items="${campuses}" var="loopCampus">
+    							<option value="${loopCampus.id}" <c:if test="${campus eq loopCampus.id}">selected="selected"</c:if>/>
+    								${loopCampus.name}
+   								</option>
     						</c:forEach>
     					</select>
     				
@@ -49,7 +51,7 @@
     						type="text"
     						name="from"
     						id="from_input"
-    						value="${param.from}"
+    						value="${from}"
     					/>
     				
     					<c:if test="${not empty errors.from}">
@@ -66,7 +68,7 @@
     						type="text"
     						name="to"
     						id="to_input"
-    						value="${param.to}"
+    						value="${to}"
     					/>
     				
     					<c:if test="${not empty errors.to}">
@@ -83,7 +85,7 @@
     						name="description"
     						rows="5"
     						class="xlarge<c:if test="${not empty errors.description}"> error</c:if>"
-   						>${param.description}</textarea>
+   						>${description}</textarea>
     				
     					<c:if test="${not empty errors.description}">
 	    					<span class="help-inline">${errors.description}</span>

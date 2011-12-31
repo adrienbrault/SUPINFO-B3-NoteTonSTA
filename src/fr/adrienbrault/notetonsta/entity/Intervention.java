@@ -35,7 +35,7 @@ public class Intervention {
     @Basic
     protected Date dateEnd;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "speaker_id")
     protected Speaker speaker;
 

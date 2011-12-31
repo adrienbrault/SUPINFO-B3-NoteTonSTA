@@ -20,6 +20,7 @@ import fr.adrienbrault.notetonsta.dao.CampusDao;
 import fr.adrienbrault.notetonsta.dao.InterventionDao;
 import fr.adrienbrault.notetonsta.entity.Campus;
 import fr.adrienbrault.notetonsta.entity.Intervention;
+import fr.adrienbrault.notetonsta.entity.Speaker;
 
 @WebServlet("/intervention/new")
 @SuppressWarnings("serial")
@@ -27,12 +28,40 @@ public class CreateInterventionServlet extends HibernateServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		Speaker speaker = (Speaker) request.getAttribute("logged_speaker");
+		
+		if (speaker == null) {
+			response.sendRedirect(request.getHeader("referer"));
+			return;
+		}
+		
 		EntityManager entityManager = createEm();
 		
 		CampusDao campusDao = new CampusDao(entityManager);
 		
 		List<Campus> campuses = campusDao.findAll();
 		request.setAttribute("campuses", campuses);
+		
+		String idString = request.getParameter("id");
+		
+		if (idString != null) {
+			Integer id = Integer.parseInt(idString);
+			
+			InterventionDao interventionDao = new InterventionDao(entityManager);
+			Intervention intervention = interventionDao.findById(id);
+			
+			if (intervention == null) {
+				return; // 404
+			}
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+			
+			request.setAttribute("subject", intervention.getSubject());
+			request.setAttribute("campus", intervention.getCampus().getId());
+			request.setAttribute("from", sdf.format(intervention.getDateBegin()));
+			request.setAttribute("to", sdf.format(intervention.getDateEnd()));
+			request.setAttribute("description", intervention.getDescription());
+		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/createIntervention.jsp");
         rd.forward(request, response);
@@ -40,12 +69,27 @@ public class CreateInterventionServlet extends HibernateServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		Speaker speaker = (Speaker) request.getAttribute("logged_speaker");
+		
+		if (speaker == null) {
+			response.sendRedirect(request.getHeader("referer"));
+			return;
+		}
+		
 		EntityManager entityManager = createEm();
 		
 		CampusDao campusDao = new CampusDao(entityManager);
 		
 		List<Campus> campuses = campusDao.findAll();
 		request.setAttribute("campuses", campuses);
+		
+		// Ugly fix
+		request.setAttribute("subject", request.getParameter("subject"));
+		request.setAttribute("campus", request.getParameter("campus"));
+		request.setAttribute("dateBegin", request.getParameter("dateBegin"));
+		request.setAttribute("dateEnd", request.getParameter("dateEnd"));
+		request.setAttribute("description", request.getParameter("description"));
+		//
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 		
@@ -90,22 +134,34 @@ public class CreateInterventionServlet extends HibernateServlet {
 			errors.put("to", "This field is required.");
 		}
 		
-		
-		
 		if (description == null || description.length() == 0) {
 			errors.put("description", "This field is required.");
 		}
 		
 		if (errors.size() == 0) {
-			Intervention intervention = new Intervention();
+			InterventionDao interventionDao = new InterventionDao(entityManager);
+			
+			String idString = request.getParameter("id");
+			
+			Intervention intervention = null;
+			if (idString != null) {
+				Integer id = Integer.parseInt(idString);
+				
+				intervention = interventionDao.findById(id);
+				
+				if (intervention == null) {
+					return; // 500
+				}
+			} else {
+				intervention = new Intervention();
+			}
 			
 			intervention.setSubject(subject);
 			intervention.setCampus(campus);
+			intervention.setSpeaker(speaker);
 			intervention.setDateBegin(fromDate);
 			intervention.setDateEnd(toDate);
 			intervention.setDescription(description);
-			
-			InterventionDao interventionDao = new InterventionDao(entityManager);
 			
 			interventionDao.beginTransaction();
 			interventionDao.persist(intervention);

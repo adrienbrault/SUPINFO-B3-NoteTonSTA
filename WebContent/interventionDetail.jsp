@@ -64,6 +64,11 @@
     		</tbody>
     	</table>
     	
+    	<c:if test="${not empty logged_speaker and logged_speaker.id eq intervention.speaker.id}">
+    		<a class="btn primary evaluateIntervention" href="${pageContext.request.contextPath}/intervention/delete?id=${intervention.id}">Remove</a>
+    		<a class="btn primary evaluateIntervention" href="${pageContext.request.contextPath}/intervention/new?id=${intervention.id}">Edit</a>
+    	</c:if>
+    	
     	<c:if test="${empty logged_speaker}">
     		<button class="btn primary evaluateIntervention">Evaluate</button>
     		
