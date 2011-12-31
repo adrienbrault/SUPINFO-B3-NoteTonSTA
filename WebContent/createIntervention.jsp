@@ -31,7 +31,7 @@
     				<div class="input" id="campus_select">
     					<select name="campus">
     						<c:forEach items="${campuses}" var="loopCampus">
-    							<option value="${loopCampus.id}" <c:if test="${campus eq loopCampus.id}">selected="selected"</c:if>/>
+    							<option value="${loopCampus.id}" <c:if test="${campus eq loopCampus.id}">selected="selected"</c:if>>
     								${loopCampus.name}
    								</option>
     						</c:forEach>
