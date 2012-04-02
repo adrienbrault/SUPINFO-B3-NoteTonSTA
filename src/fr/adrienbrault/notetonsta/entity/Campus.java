@@ -3,6 +3,8 @@ package fr.adrienbrault.notetonsta.entity;
 import javax.persistence.*;
 import java.util.List;
 
+import javax.xml.bind.annotation.*;
+
 /**
  * Author: Adrien Brault
  * Date: 12/12/11
@@ -11,6 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "campus")
+@XmlRootElement
 public class Campus {
 
     @Id
@@ -43,6 +46,7 @@ public class Campus {
         this.name = name;
     }
 
+    @XmlTransient
     public List<Intervention> getInterventions() {
         return interventions;
     }

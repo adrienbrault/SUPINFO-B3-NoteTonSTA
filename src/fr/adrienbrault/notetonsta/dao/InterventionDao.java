@@ -20,7 +20,8 @@ public class InterventionDao extends Dao<Intervention, Integer> {
 		Query query = entityManager.createQuery(
 			"SELECT i " +
 			"FROM " + entityClass.getName() + " i " +
-			"WHERE i.campus = :campus "
+			"WHERE i.campus = :campus " +
+			"ORDER BY i.dateBegin "
 		);
 		query.setParameter("campus", campus);
 		
@@ -32,7 +33,8 @@ public class InterventionDao extends Dao<Intervention, Integer> {
 		Query query = entityManager.createQuery(
 			"SELECT i " +
 			"FROM " + entityClass.getName() + " i " +
-			"WHERE i.speaker = :speaker "
+			"WHERE i.speaker = :speaker " +
+			"ORDER BY i.dateBegin "
 		);
 		query.setParameter("speaker", speaker);
 		

@@ -1,6 +1,8 @@
 package fr.adrienbrault.notetonsta.entity;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import java.util.List;
 
@@ -12,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "speaker")
+@XmlRootElement
 public class Speaker {
 
     @Id
@@ -56,6 +59,7 @@ public class Speaker {
         this.email = email;
     }
 
+    @XmlTransient
     public String getPassword() {
         return password;
     }
@@ -64,6 +68,7 @@ public class Speaker {
         this.password = password;
     }
 
+    @XmlTransient
     public String getSalt() {
         return salt;
     }
@@ -88,6 +93,7 @@ public class Speaker {
         this.lastName = lastName;
     }
 
+    @XmlTransient
     public List<Intervention> getInterventions() {
         return interventions;
     }

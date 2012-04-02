@@ -1,6 +1,8 @@
 package fr.adrienbrault.notetonsta.entity;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Author: Adrien Brault
@@ -10,6 +12,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "evaluation")
+@XmlRootElement
 public class Evaluation {
 
     @Id
@@ -44,6 +47,10 @@ public class Evaluation {
     @Basic
     protected Float slidesExamplesMark;
 
+    public Evaluation() {
+    	
+    }
+    
     public Evaluation(Intervention intervention) {
     	setIntervention(intervention);
     }
@@ -56,6 +63,7 @@ public class Evaluation {
         this.id = id;
     }
 
+    @XmlTransient
     public Intervention getIntervention() {
         return intervention;
     }
