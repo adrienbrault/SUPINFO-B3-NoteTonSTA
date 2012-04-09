@@ -57,7 +57,6 @@ public class Intervention {
         this.id = id;
     }
 
-    @XmlTransient
     public Campus getCampus() {
         return campus;
     }
